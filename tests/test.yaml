@@ -1,0 +1,21 @@
+---
+- hosts: eos
+  connection: network_cli
+  gather_facts: false
+  vars:
+    network_system_hostname: "eos-test"
+    playbook_locations:
+      - "{{playbook_dir}}/../../network-system"
+      - "~/.ansible/network/network-system"
+      - "/etc/ansible/network/network-system"
+  tasks:
+    # - include_role:
+    #     name: '{{ item }}'
+    #   with_first_found:
+    #     - "{{playbook_dir}}/../../network-system"
+    #     - ~/.ansible/network/network-system
+    #     - "/etc/ansible/network/network-system"
+
+    - include_role:
+        name: '{{ item }}'
+      loop: "{{lookup('first_found', playbook_locations, wantlist=True)}}"

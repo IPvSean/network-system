@@ -1,0 +1,3 @@
+- name: ARISTA EOS LOAD SYSTEM TEMPLATE
+  eos_config:
+    src: "{{ansible_network_os}}.j2"

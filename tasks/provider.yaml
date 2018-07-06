@@ -1,0 +1,8 @@
+---
+- name: include device role specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ playbook_dir }}/providers/{{ ansible_network_os }}.yaml"
+    - "~/.ansible/network/network-system/providers/{{ ansible_network_os }}.yaml"
+    - "/etc/ansible/network/network-system/providers/{{ ansible_network_os }}.yaml"
+    - "{{ role_path }}/providers/{{ ansible_network_os }}.yaml"
